@@ -40,31 +40,31 @@ void loadWordFreq(const string& path, vector<vector<float>>& freq)
 	cout << "    " << duration_cast<seconds>(t1 - t0).count() << " sec\n";
 }
 
-bool epsilon(float f, float eps = 1e-7)
+inline bool epsilon(float f, float eps = 1e-7)
 {
 	return abs(f) < eps;
 }
 
-bool equals(const vector<float>& v1, const vector<float>& v2)
+inline bool equals(const vector<float>& v1, const vector<float>& v2)
 {
 	if (v1.size() != v2.size()) return false;
 
 	return equal(v1.begin(), v1.end(), v2.begin(), [](float f1, float f2) { return epsilon(f1 - f2); });
 }
 
-vector<float>& add(vector<float>& v1, const vector<float>& v2)
+inline vector<float>& add(vector<float>& v1, const vector<float>& v2)
 {
 	transform(v1.begin(), v1.end(), v2.begin(), v1.begin(), plus<float>());
 	return v1;
 }
 
-vector<float>& mult(vector<float>& v, float t)
+inline vector<float>& mult(vector<float>& v, float t)
 {
 	transform(v.begin(), v.end(), v.begin(), [&](float vi) { return vi * t; });
 	return v;
 }
 
-vector<float> mult(const vector<float>& v1, const vector<float>& v2)
+inline vector<float> mult(const vector<float>& v1, const vector<float>& v2)
 {
 	vector<float> out(v1.size());
 	transform(v1.begin(), v1.end(), v2.begin(), out.begin(), [](float vi, float vj) {
@@ -73,17 +73,17 @@ vector<float> mult(const vector<float>& v1, const vector<float>& v2)
 	return out;
 }
 
-float sum(const vector<float>& v)
+inline float sum(const vector<float>& v)
 {
 	return accumulate(v.begin(), v.end(), 0.0);
 }
 
-float length(const vector<float>& v)
+inline float length(const vector<float>& v)
 {
 	return sqrtf(sum(mult(v, v)));
 }
 
-vector<float> average(const vector<int>& docIds, const vector<vector<float>>& freq)
+inline vector<float> average(const vector<int>& docIds, const vector<vector<float>>& freq)
 {
 	vector<float> init(freq[0].size(), 0.0f);
 	vector<float> avg = accumulate(docIds.begin(), docIds.end(), init, [&](auto& sum, int id) {
@@ -94,7 +94,7 @@ vector<float> average(const vector<int>& docIds, const vector<vector<float>>& fr
 	return avg;
 }
 
-vector<float> variance(const vector<int>& docIds, const vector<vector<float>>& freq, const vector<float>& averageCluster)
+inline vector<float> variance(const vector<int>& docIds, const vector<vector<float>>& freq, const vector<float>& averageCluster)
 {
 	const int nbWords = averageCluster.size();
 	vector<float> var(nbWords);
