@@ -25,7 +25,7 @@ script:
 jobs:
   include:
     - stage: Build
-      script: g++ -std=c++14 -o build Part1/part1.cpp Part2/part2.cpp Part4/part4.cpp part5/part5.cpp preproc/preproc1.cpp preproc2/preproc2.cpp preproc4/preproc4.cpp
+      script: g++ -o build Part1/part1.cpp Part2/part2.cpp Part4/part4.cpp part5/part5.cpp preproc/preproc1.cpp preproc2/preproc2.cpp
 
   
   # Run your build commands next
