@@ -12,6 +12,7 @@ addons:
       - gcc-5
       - g++-5
       - cmake
+      - libgtest-dev
 script:
   # Link gcc-6 and g++-6 to their standard commands
   - sudo ln -s /usr/bin/gcc-5 /usr/local/bin/gcc
@@ -26,6 +27,7 @@ jobs:
   include:
     - stage: Build
       script: g++ -std=c++17 -o build Part1/part1.cpp Part2/part2.cpp Part4/part4.cpp part5/part5.cpp preproc/preproc1.cpp preproc2/preproc2.cpp
-
+    -stage: Test
+     script: g++ -std=c++11 -o test Sample-Test1/test.cpp Sample-Test1/pch.cpp
   
   # Run your build commands next
