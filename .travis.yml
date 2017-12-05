@@ -6,13 +6,13 @@ compiler:
   - gcc
 addons:
   apt:
-	sources:
-	  - ubuntu-toolchain-r-test
-	packages:
-	  - gcc-6
-	  - g++-6
-	  - cmake
-	  - libgtest-dev
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-6
+      - g++-6
+      - cmake
+      - libgtest-dev
 script:
   # Link gcc-6 and g++-6 to their standard commands
   - sudo ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
@@ -37,7 +37,7 @@ jobs:
       script: 
         - g++-6 -pthread -o unit -std=c++14 Sample-Test1/unitTest.cpp
         - ./unit.out
-	- stage: FonctionnelTest
+    - stage: FonctionnelTest
       script: 
         - g++-6 -pthread -o fonctionnel -std=c++14 Sample-Test1/fonctionnelTest.cpp
         - ./fonctionnel.out
