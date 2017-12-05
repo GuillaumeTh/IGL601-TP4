@@ -83,11 +83,12 @@ inline bool epsilon(float f, float eps = 1e-7)
 	return abs(f) < eps;
 }
 
-inline bool equals(const vector<float>& v1, const vector<float>& v2)
+template <class T>
+inline bool equals(const vector<T>& v1, const vector<T>& v2)
 {
 	if (v1.size() != v2.size()) return false;
 
-	return equal(v1.begin(), v1.end(), v2.begin(), [](float f1, float f2) { return epsilon(f1 - f2); });
+	return equal(v1.begin(), v1.end(), v2.begin(), [](T f1, T f2) { return epsilon(f1 - f2); });
 }
 
 inline vector<float>& add(vector<float>& v1, const vector<float>& v2)
