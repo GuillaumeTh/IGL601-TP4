@@ -19,10 +19,10 @@ TEST_CASE("VARIANCE")
 TEST_CASE("LOADING")
 {
 	veci indexes;
-	load("testIds.txt", indexes);
+	load("./testIds.txt", indexes);
 
 	vector<vecf> data;
-	loadClusterData("testData.txt", data);
+	loadClusterData("./testData.txt", data);
 
 	vecf avg = average(indexes, data);
 	vecf expect(4, 3.f);
