@@ -41,5 +41,3 @@ script:
         script: 
           - g++-6 -pthread -o fonctionnel.out -std=c++14 Sample-Test1/fonctionnelTest.cpp
           - ./fonctionnel.out
-
-    # Run your build commands next
