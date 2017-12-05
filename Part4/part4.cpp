@@ -15,44 +15,6 @@ using sstream = stringstream;
 template <class T, class U>
 using umap = unordered_map<T, U>;
 
-template <class T>
-void loadClusterData(const string& path, vector<vector<T>>& out)
-{
-	ifstream clustersFile(path);
-	string line;
-	int clusterId;
-	T in;
-	while (getline(clustersFile, line))
-	{
-		sstream ss(line);
-		ss >> clusterId;
-		//cout << "\rLoading... " << clusterId;
-		vector<T> data;
-
-		while (ss >> in)
-		{
-			data.push_back(in);
-		}
-		out.push_back(data);
-	}
-	cout << "\n";
-}
-
-template <class T>
-void load(const string& path, vector<T>& data)
-{
-	int id;
-	T in;
-	ifstream file(path);
-	while (file >> id)
-	{
-		//cout << "\rLoading... " << id;
-		file >> in;
-		data.push_back(in);
-	}
-	cout << "\n";
-}
-
 void load2(const string& path, umap<int, int>& data)
 {
 	int id;

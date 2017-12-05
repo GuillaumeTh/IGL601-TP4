@@ -75,12 +75,3 @@ TEST_CASE("AVERAGE")
     vecf res = average(indexes, data);
     REQUIRE(equals(expect, res));
 }
-TEST_CASE("VARIANCE")
-{
-    veci indexes{ 0,2 };
-    vector<vecf> data{ vecf(5, -1.f), vecf(5, -100.f), vecf(5, 1.f) };
-    vecf avg = average(indexes, data);
-    vecf res = variance(indexes, data, avg);
-    vecf expect(5, 1.f);
-    REQUIRE(equals(expect, res));
-}
