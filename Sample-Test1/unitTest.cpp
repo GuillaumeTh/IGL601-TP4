@@ -75,3 +75,10 @@ TEST_CASE("AVERAGE")
     vecf res = average(indexes, data);
     REQUIRE(equals(expect, res));
 }
+TEST_CASE("LOAD")
+{
+	veci data;
+	load("testIds.txt", data);
+	veci expect{ 0,2,4 };
+	REQUIRE(equals(expect, data));
+}
