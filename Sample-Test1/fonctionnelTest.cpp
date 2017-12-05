@@ -6,26 +6,12 @@
 using vecf = std::vector<float>;
 using veci = std::vector<int>;
 
-TEST_CASE("VARIANCE")
+TEST_CASE("KMEAN")
 {
-    veci indexes{ 0,2 };
-    vector<vecf> data{ vecf(5, -1.f), vecf(5, -100.f), vecf(5, 1.f) };
-    vecf avg = average(indexes, data);
-    vecf res = variance(indexes, data, avg);
-    vecf expect(5, 1.f);
-    REQUIRE(equals(expect, res));
-}
-
-TEST_CASE("LOADING")
-{
-	veci indexes;
-	load("./testIds.txt", indexes);
-
-	vector<vecf> data;
-	loadClusterData("./testData.txt", data);
-
-	vecf avg = average(indexes, data);
-	vecf expect(4, 3.f);
-
-	REQUIRE(equals(avg, expect));
+	vector<vecf> freq(10, vecf(20, 5.f));
+	veci docIds{ 0,2,4,6,8 };
+	vector<veci> clusterToDoc;
+	vector<vecf> weights;
+	kMean(10, 1, freq, docIds, clusterTodoc, weights, false, false, 1);
+    REQUIRE(clusterToDoc.size() == 10);
 }
