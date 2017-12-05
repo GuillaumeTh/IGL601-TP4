@@ -1,4 +1,4 @@
-#include "..\utils.h"
+#include "../utils.h"
 
 void recursiveKMean(const int nbClusters, const int nbIterations, const int layer,
 	const string& id,
