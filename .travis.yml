@@ -27,6 +27,10 @@ jobs:
       script: 
         - g++-6 -pthread -o unit.out -std=c++14 Sample-Test1/unitTest.cpp
         - ./unit.out
+    - stage: IntegrationTest
+      script: 
+        - g++-6 -pthread -o integration.out -std=c++14 Sample-Test1/integrationTest.cpp
+        - ./integration.out
     - stage: FonctionnelTest
       script: 
         - g++-6 -pthread -o fonctionnel.out -std=c++14 Sample-Test1/fonctionnelTest.cpp
