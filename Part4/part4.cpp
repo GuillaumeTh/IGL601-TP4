@@ -142,7 +142,8 @@ int main()
 			cout << "\rNo weights, computing variance... " << c << " / " << nbClusters;
 			const auto& clusterDocIds = clusters[c];
 			const auto avg = average(clusterDocIds, freq);
-			var[c] = mult(variance(clusterDocIds, freq, avg), -1.0f);
+			auto temp = variance(clusterDocIds, freq, avg);
+			var[c] = mult(temp, -1.0f);
 		}
 	}
 	cout << "\n";
