@@ -5,7 +5,7 @@
 using vecf = std::vector<float>;
 using veci = std::vector<int>;
 
-TEST(EQUAL) {
+TEST(EQUAL, equal) {
 	vecf v1(10, 0.f);
 	vecf v2(10, 0.f);
 	vecf v3(10, 1.f);
@@ -16,7 +16,7 @@ TEST(EQUAL) {
 	EXPECT_FALSE(equals(v1, v4));
 }
 
-TEST(ADD) {
+TEST(ADD, add) {
 	vecf v1(5, 1.f);
 	vecf v2(5, 2.f);
 	vecf expect(5, 3.f);
@@ -27,7 +27,7 @@ TEST(ADD) {
 	EXPECT_TRUE(&v1 == &res);
 }
 
-TEST(MULT_SCALAR) {
+TEST(MULT_SCALAR, mult_scalar) {
 	vecf v1(5, 2.f);
 	float f = 3.f;
 	vecf expect(5, 6.f);
@@ -38,7 +38,7 @@ TEST(MULT_SCALAR) {
 }
 
 
-		TEST(MULT_VEC)
+		TEST(MULT_VEC, mult_vec)
 		{
 			vecf v1(5, 2.f);
 			vecf v2(5, 3.f);
@@ -48,14 +48,14 @@ TEST(MULT_SCALAR) {
 			EXPECT_FALSE(equals(res, v1));
 			EXPECT_FALSE(equals(res, v2));
 		}
-		TEST(SUM)
+		TEST(SUM, sum)
 		{
 			vecf v1(5, 2.f);
 			float expect = 10.f;
 			float res = sum(v1);
 			EXPECT_TRUE(epsilon(res - expect));
 		}
-		TEST(LENGTH)
+		TEST(LENGTH, length)
 		{
 			vecf v1{ 3,4 };
 			vecf v2(16, 4.f);
@@ -66,7 +66,7 @@ TEST(MULT_SCALAR) {
 			EXPECT_TRUE(epsilon(expect1 - res1));
 			EXPECT_TRUE(epsilon(expect2 - res2));
 		}
-		TEST(AVERAGE)
+		TEST(AVERAGE, average)
 		{
 			veci indexes{ 0,2 };
 			vector<vecf> data{ vecf(5, -1.f), vecf(5, -100.f), vecf(5, 1.f) };
@@ -74,7 +74,7 @@ TEST(MULT_SCALAR) {
 			vecf res = average(indexes, data);
 			EXPECT_TRUE(equals(expect, res));
 		}
-		TEST(VARIANCE)
+		TEST(VARIANCE, variance)
 		{
 			veci indexes{ 0,2 };
 			vector<vecf> data{ vecf(5, -1.f), vecf(5, -100.f), vecf(5, 1.f) };
@@ -84,7 +84,7 @@ TEST(MULT_SCALAR) {
 			EXPECT_TRUE(equals(expect, res));
 		}
 
-//int main(int argc, char **argv) {
-//	::testing::InitGoogleTest(&argc, argv);
-//	return RUN_ALL_TESTS();
-//}
+int main(int argc, char **argv) {
+	::testing::InitGoogleTest(&argc, argv);
+	return RUN_ALL_TESTS();
+}
