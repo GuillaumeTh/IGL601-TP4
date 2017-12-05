@@ -79,6 +79,10 @@ TEST_CASE("LOAD")
 {
 	veci data;
 	load("testIds.txt", data);
+	cout << "DATA : ";
+	for (int i : data)
+		cout << i << " ";
+	cout << " END\n";
 	veci expect{ 0,2,4 };
 	REQUIRE(equals(expect, data));
 }
