@@ -26,7 +26,7 @@ script:
 jobs:
   include:
     - stage: Build
-      script: g++-6 -std=c++14 Part1/part1.cpp Part2/part2.cpp Part4/part4.cpp part5/part5.cpp preproc/preproc1.cpp preproc2/preproc2.cpp
+      script: g++-6 -std=c++14 Part1/part1.cpp
     - stage: Test
       script:
   # Run your build commands next
