@@ -35,11 +35,11 @@ jobs:
         - g++-6 -pthread -std=c++14 preproc2/preproc2.cpp
     - stage: UnitTest
       script: 
-        - g++-6 -pthread -o unit -std=c++14 Sample-Test1/unitTest.cpp
+        - g++-6 -pthread -o unit.out -std=c++14 Sample-Test1/unitTest.cpp
         - ./unit.out
     - stage: FonctionnelTest
       script: 
-        - g++-6 -pthread -o fonctionnel -std=c++14 Sample-Test1/fonctionnelTest.cpp
+        - g++-6 -pthread -o fonctionnel.out -std=c++14 Sample-Test1/fonctionnelTest.cpp
         - ./fonctionnel.out
      
   # Run your build commands next
