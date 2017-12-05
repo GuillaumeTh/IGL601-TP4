@@ -23,21 +23,21 @@ script:
   # Check versions of gcc, g++ and cmake
   - gcc-6 -v && g++-6 -v && cmake --version
   
-  -jobs:
-    include:
-      - stage: Build
-        script: 
-          - g++-6 -pthread -std=c++14 Part1/part1.cpp
-          - g++-6 -pthread -std=c++14 Part2/part2.cpp 
-          - g++-6 -pthread -std=c++14 Part4/part4.cpp 
-          - g++-6 -pthread -std=c++14 part5/part5.cpp 
-          - g++-6 -pthread -std=c++14 preproc/preproc1.cpp
-          - g++-6 -pthread -std=c++14 preproc2/preproc2.cpp
-      - stage: UnitTest
-        script: 
-          - g++-6 -pthread -o unit.out -std=c++14 Sample-Test1/unitTest.cpp
-          - ./unit.out
-      - stage: FonctionnelTest
-        script: 
-          - g++-6 -pthread -o fonctionnel.out -std=c++14 Sample-Test1/fonctionnelTest.cpp
-          - ./fonctionnel.out
+jobs:
+  include:
+    - stage: Build
+      script: 
+        - g++-6 -pthread -std=c++14 Part1/part1.cpp
+        - g++-6 -pthread -std=c++14 Part2/part2.cpp 
+        - g++-6 -pthread -std=c++14 Part4/part4.cpp 
+        - g++-6 -pthread -std=c++14 part5/part5.cpp 
+        - g++-6 -pthread -std=c++14 preproc/preproc1.cpp
+        - g++-6 -pthread -std=c++14 preproc2/preproc2.cpp
+    - stage: UnitTest
+      script: 
+        - g++-6 -pthread -o unit.out -std=c++14 Sample-Test1/unitTest.cpp
+        - ./unit.out
+    - stage: FonctionnelTest
+      script: 
+        - g++-6 -pthread -o fonctionnel.out -std=c++14 Sample-Test1/fonctionnelTest.cpp
+        - ./fonctionnel.out
