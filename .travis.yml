@@ -34,5 +34,8 @@ jobs:
         - g++-6 -pthread -std=c++14 preproc/preproc1.cpp
         - g++-6 -pthread -std=c++14 preproc2/preproc2.cpp
     - stage: Test
-      script: g++-6 -std=c++14 Sample-Test1/test.cpp
+      script: 
+        - g++-6 -pthread -std=c++14 Sample-Test1/test.cpp
+        - ./a.out
+     
   # Run your build commands next
