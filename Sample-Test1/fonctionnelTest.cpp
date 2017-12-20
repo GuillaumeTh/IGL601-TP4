@@ -12,6 +12,6 @@ TEST_CASE("KMEAN")
 	veci docIds{ 0,2,4,6,8 };
 	vector<veci> clusterToDoc;
 	vector<vecf> weights;
-	kMean(10, 1, freq, docIds, clusterTodoc, weights, false, false, 1);
+	kMean(10, 1, freq, docIds, clusterToDoc, weights, false, false, 1);
     REQUIRE(clusterToDoc.size() == 10);
 }
