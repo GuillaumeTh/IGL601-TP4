@@ -7,7 +7,7 @@
 #include <tuple>
 #include <random>
 
-#include "..\utils.h"
+#include "../utils.h"
 
 using namespace std;
 

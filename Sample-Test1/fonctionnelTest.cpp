@@ -13,7 +13,15 @@ TEST_CASE("KMEAN")
 	vector<veci> clusterToDoc;
 	vector<vecf> weights;
 	kMean(10, 1, freq, docIds, clusterToDoc, weights, false, false, 1);
-    REQUIRE(clusterToDoc.size() == 10);
+
+	int expectSize = 10;
+    REQUIRE(clusterToDoc.size() == expectSize);
+
+	vector<vecf> expectWeights(10, vector<float>(5, 1.0f));
+	for (int i = 0; i < expectWeights.size(); ++i)
+	{
+		REQUIRE(equals(expectWeights[i], weights[i]));
+	}
 }
 
 TEST_CASE("RECURS_KMEAN")
@@ -23,5 +31,13 @@ TEST_CASE("RECURS_KMEAN")
 	vector<veci> clusterToDoc;
 	vector<vecf> weights;
 	recursiveKMean(16, 1, 1, ".", freq, docIds, clusterToDoc, weights, false);
-	REQUIRE(clusterToDoc.size() == 10);
+
+	int expectSize = 16;
+	REQUIRE(clusterToDoc.size() == 16);
+
+	vector<vecf> expectWeights(16, vector<float>(5, 1.0f));
+	for (int i = 0; i < expectWeights.size(); ++i)
+	{
+		REQUIRE(equals(expectWeights[i], weights[i]));
+	}
 }

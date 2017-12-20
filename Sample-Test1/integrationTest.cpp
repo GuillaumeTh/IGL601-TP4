@@ -6,6 +6,15 @@
 using vecf = std::vector<float>;
 using veci = std::vector<int>;
 
+TEST_CASE("AVERAGE")
+{
+	veci indexes{ 0,2 };
+	vector<vecf> data{ vecf(5, -1.f), vecf(5, -100.f), vecf(5, 1.f) };
+	vecf expect(5, 0.f);
+	vecf res = average(indexes, data);
+	REQUIRE(equals(expect, res));
+}
+
 TEST_CASE("VARIANCE")
 {
     veci indexes{ 0,2 };
