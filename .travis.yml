@@ -12,9 +12,18 @@ addons:
       - gcc-6
       - g++-6
       - cmake
+      - cppcheck
   
 jobs:
   include:
+    - stage: CppCheck
+      script:
+        - cppcheck Part1/part1.cpp
+        - cppcheck Part2/part2.cpp
+        - cppcheck Part4/part4.cpp
+        - cppcheck part5/part5.cpp
+        - cppcheck preproc/preproc1.cpp
+        - cppcheck preproc2/preproc2.cpp
     - stage: Build
       script: 
         - g++-6 -pthread -std=c++14 Part1/part1.cpp
@@ -23,15 +32,15 @@ jobs:
         - g++-6 -pthread -std=c++14 part5/part5.cpp 
         - g++-6 -pthread -std=c++14 preproc/preproc1.cpp
         - g++-6 -pthread -std=c++14 preproc2/preproc2.cpp
-    - stage: UnitTest
-      script: 
+    - stage: Test
+      script:
         - g++-6 -pthread -o unit.out -std=c++14 Sample-Test1/unitTest.cpp
         - ./unit.out
-    - stage: IntegrationTest
-      script: 
+    -
+      script:
         - g++-6 -pthread -o integration.out -std=c++14 Sample-Test1/integrationTest.cpp
         - ./integration.out
-    - stage: FonctionnelTest
-      script: 
+    -
+      script:
         - g++-6 -pthread -o fonctionnel.out -std=c++14 Sample-Test1/fonctionnelTest.cpp
         - ./fonctionnel.out
