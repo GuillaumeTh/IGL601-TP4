@@ -34,6 +34,7 @@ jobs:
         - g++-6 -pthread -std=c++14 preproc2/preproc2.cpp
     - stage: Test
       script:
+        - ls
         - g++-6 -pthread -o unit.out -std=c++14 Sample-Test1/unitTest.cpp
         - ./unit.out
     -
