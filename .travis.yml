@@ -30,4 +30,5 @@ jobs:
       script: ./unit.out
     - # stage name not required, will continue to use `test`
       script: ./integration.out
+    -
       script: ./fonctionnel.out
