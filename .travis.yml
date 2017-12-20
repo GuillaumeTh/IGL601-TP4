@@ -3,7 +3,7 @@ sudo: required
 language:
   - cpp
 compiler:
-  - gcc-6
+  - gcc
 before_install:
   - sudo apt-get -yq --no-install-suggests --no-install-recommends --force-yes --no-upgrade install gcc-6 g++-6 cmake cppcheck clang
   
