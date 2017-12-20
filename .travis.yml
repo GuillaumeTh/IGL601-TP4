@@ -23,13 +23,10 @@ jobs:
         - g++-6 -pthread -std=c++14 part5/part5.cpp 
         - g++-6 -pthread -std=c++14 preproc/preproc1.cpp
         - g++-6 -pthread -std=c++14 preproc2/preproc2.cpp
-    - stage: Test
-      script: 
         - g++-6 -pthread -o unit.out -std=c++14 Sample-Test1/unitTest.cpp
-        - ./unit.out
-      script:
         - g++-6 -pthread -o integration.out -std=c++14 Sample-Test1/integrationTest.cpp
-        - ./integration.out
-      script:
         - g++-6 -pthread -o fonctionnel.out -std=c++14 Sample-Test1/fonctionnelTest.cpp
-        - ./fonctionnel.out
+    - stage: Test
+      script: ./unit.out
+      script: ./integration.out
+      script: ./fonctionnel.out
