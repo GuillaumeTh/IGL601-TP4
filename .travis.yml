@@ -13,6 +13,7 @@ addons:
       - g++-6
       - cmake
       - cppcheck
+      - clang
   
 jobs:
   include:
@@ -24,6 +25,14 @@ jobs:
         - cppcheck part5/part5.cpp
         - cppcheck preproc/preproc1.cpp
         - cppcheck preproc2/preproc2.cpp
+    - stage: ClangAnalyser
+          script:
+            - clang --analyze -std=c++14 Part1/part1.cpp
+            - clang --analyze -std=c++14 Part2/part2.cpp
+            - clang --analyze -std=c++14 Part4/part4.cpp
+            - clang --analyze -std=c++14 part5/part5.cpp
+            - clang --analyze -std=c++14 preproc/preproc1.cpp
+            - clang --analyze -std=c++14 preproc2/preproc2.cpp
     - stage: Build
       script: 
         - g++-6 -pthread -std=c++14 Part1/part1.cpp
