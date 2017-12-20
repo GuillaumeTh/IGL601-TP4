@@ -28,5 +28,6 @@ jobs:
         - g++-6 -pthread -o fonctionnel.out -std=c++14 Sample-Test1/fonctionnelTest.cpp
     - stage: Test
       script: ./unit.out
+    - # stage name not required, will continue to use `test`
       script: ./integration.out
       script: ./fonctionnel.out
