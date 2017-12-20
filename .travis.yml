@@ -35,7 +35,7 @@ jobs:
     - stage: Test
       script:
         - g++-6 -pthread -o unit.out -std=c++14 Sample-Test1/unitTest.cpp
-        -./unit.out
+        - ./unit.out
     -
       script:
         - g++-6 -pthread -o integration.out -std=c++14 Sample-Test1/integrationTest.cpp
