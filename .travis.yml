@@ -3,17 +3,9 @@ sudo: required
 language:
   - cpp
 compiler:
-  - gcc
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - gcc-6
-      - g++-6
-      - cmake
-      - cppcheck
-      - clang
+  - gcc-6
+before_install:
+  - sudo apt-get -yq --no-install-suggests --no-install-recommends --force-yes --no-upgrade install gcc-6 g++-6 cmake cppcheck clang
   
 jobs:
   include:
