@@ -78,7 +78,7 @@ TEST_CASE("AVERAGE")
 TEST_CASE("LOAD")
 {
 	veci data;
-	load("./testIds.txt", data);
+	load("testIds.txt", data);
 	cout << "DATA : ";
 	for (int i : data)
 		cout << i << " ";
