@@ -17,7 +17,7 @@ addons:
   
 jobs:
   include:
-    - stage: CppCheck
+    - stage: Analyze
       script:
         - cppcheck Part1/part1.cpp
         - cppcheck Part2/part2.cpp
@@ -25,8 +25,6 @@ jobs:
         - cppcheck part5/part5.cpp
         - cppcheck preproc/preproc1.cpp
         - cppcheck preproc2/preproc2.cpp
-    - stage: ClangAnalyser
-      script:
         - clang --analyze -std=c++14 Part1/part1.cpp
         - clang --analyze -std=c++14 Part2/part2.cpp
         - clang --analyze -std=c++14 Part4/part4.cpp
