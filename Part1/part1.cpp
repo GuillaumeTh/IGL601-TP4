@@ -7,69 +7,11 @@
 #include <tuple>
 #include <random>
 
+#include "..\utils.h"
+
 using namespace std;
 
 pair<int, int> t;
-
-int maxRepeatingChar(const string& s)
-{
-	int res = 0;
-	size_t l = s.length();
-	for (size_t i = 0; i < l;)
-	{
-		int consec = 1;
-		for (size_t j = i + 1; j < l && s[i] == s[j]; ++j, ++consec) {}
-		i += consec;
-		res = max(res, consec);
-	}
-	return res;
-}
-
-int levenshteinDist(const string& w1, const string& w2)
-{
-	int dist;
-	size_t l1 = w1.length();
-	size_t l2 = w2.length();
-
-	if (!l1)
-	{
-		dist = l2;
-	}
-	else if (!l2)
-	{
-		dist = l1;
-	}
-	else
-	{
-		vector<vector<int>> matrix(l2 + 1, vector<int>(l1 + 1));
-		for (size_t c = 0; c <= l1; c++)
-		{
-			matrix[0][c] = c;
-		}
-		for (size_t l = 0; l <= l2; l++)
-		{
-			matrix[l][0] = l;
-		}
-		for (size_t c = 1; c <= l1; c++)
-		{
-			for (size_t l = 1; l <= l2; l++)
-			{
-				int cost = w1[c - 1] == w2[l - 1] ? 0 : 1;
-				int top = matrix[l - 1][c] + 1;
-				int left = matrix[l][c - 1] + 1;
-				int diag = matrix[l - 1][c - 1] + cost;
-				matrix[l][c] = min({ top, left, diag });
-			}
-		}
-		dist = matrix[l2][l1];
-	}
-	return dist;
-}
-
-double normLevenshteinDist(const string& w1, const string& w2)
-{
-	return double(levenshteinDist(w1, w2)) / double(max(w1.length(), w2.length()));
-}
 
 int main()
 {

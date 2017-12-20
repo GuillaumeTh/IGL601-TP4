@@ -17,6 +17,66 @@ using namespace std::chrono;
 
 using sstream = stringstream;
 
+int maxRepeatingChar(const string& s)
+{
+	int res = 0;
+	size_t l = s.length();
+	for (size_t i = 0; i < l;)
+	{
+		int consec = 1;
+		for (size_t j = i + 1; j < l && s[i] == s[j]; ++j, ++consec) {}
+		i += consec;
+		res = max(res, consec);
+	}
+	return res;
+}
+
+int levenshteinDist(const string& w1, const string& w2)
+{
+	int dist;
+	size_t l1 = w1.length();
+	size_t l2 = w2.length();
+
+	if (!l1)
+	{
+		dist = l2;
+	}
+	else if (!l2)
+	{
+		dist = l1;
+	}
+	else
+	{
+		vector<vector<int>> matrix(l2 + 1, vector<int>(l1 + 1));
+		for (size_t c = 0; c <= l1; c++)
+		{
+			matrix[0][c] = c;
+		}
+		for (size_t l = 0; l <= l2; l++)
+		{
+			matrix[l][0] = l;
+		}
+		for (size_t c = 1; c <= l1; c++)
+		{
+			for (size_t l = 1; l <= l2; l++)
+			{
+				int cost = w1[c - 1] == w2[l - 1] ? 0 : 1;
+				int top = matrix[l - 1][c] + 1;
+				int left = matrix[l][c - 1] + 1;
+				int diag = matrix[l - 1][c - 1] + cost;
+				matrix[l][c] = min({ top, left, diag });
+			}
+		}
+		dist = matrix[l2][l1];
+	}
+	return dist;
+}
+
+double normLevenshteinDist(const string& w1, const string& w2)
+{
+	return double(levenshteinDist(w1, w2)) / double(max(w1.length(), w2.length()));
+}
+
 template <class T>
 void load(const string& path, vector<T>& data)
 {
@@ -352,5 +412,61 @@ void kMean(const int nbClusters, const int nbIterations,
 		sstream ss;
 		ss << "Iteration time : " << duration_cast<milliseconds>(t4 - t0).count() << "\n";
 		cout << ss.str();
+	}
+}
+
+void recursiveKMean(const int nbClusters, const int nbIterations, const int layer,
+	const string& id,
+	const vector<vector<float>>& freq,
+	const vector<int>& docIds,
+	vector<vector<int>>& clusterToDoc,
+	vector<vector<float>>& weights,
+	const bool weighted)
+{
+
+	auto t0 = high_resolution_clock::now();
+	vector<vector<int>> localClusterToDoc;
+	vector<vector<float>> localWeights;
+	kMean(2, nbIterations, freq, docIds, localClusterToDoc, localWeights, weighted, false, 0);
+	auto t1 = high_resolution_clock::now();
+
+	sstream ss;
+	ss << layer << " " << id << "    " << docIds.size();
+	ss << " time : " << duration_cast<seconds>(t1 - t0).count() << " sec\n";
+	cout << ss.str();
+
+	if (nbClusters > 2)
+	{
+		vector<vector<int>> nextC1;
+		vector<vector<float>> nextW1;
+		vector<vector<int>> nextC2;
+		vector<vector<float>> nextW2;
+		if (layer < 4)
+		{
+			thread th1([&]() {
+				recursiveKMean(nbClusters / 2, nbIterations, layer + 1, id + "0", freq, localClusterToDoc[0], nextC1, nextW1, weighted);
+			});
+			thread th2([&]() {
+				recursiveKMean(nbClusters / 2, nbIterations, layer + 1, id + "1", freq, localClusterToDoc[1], nextC2, nextW2, weighted);
+			});
+			th1.join();
+			th2.join();
+		}
+		else
+		{
+			recursiveKMean(nbClusters / 2, nbIterations, layer + 1, id + "0", freq, localClusterToDoc[0], nextC1, nextW1, weighted);
+			recursiveKMean(nbClusters / 2, nbIterations, layer + 1, id + "1", freq, localClusterToDoc[1], nextC2, nextW2, weighted);
+		}
+
+		nextC1.insert(nextC1.end(), nextC2.begin(), nextC2.end());
+		nextW1.insert(nextW1.end(), nextW2.begin(), nextW2.end());
+
+		clusterToDoc = nextC1;
+		weights = nextW1;
+	}
+	else
+	{
+		clusterToDoc = localClusterToDoc;
+		weights = localWeights;
 	}
 }
